@@ -24,8 +24,10 @@
                             border: '#30363d',
                             text: '#c9d1d9',
                             muted: '#8b949e',
-                            accent: '#dc2626',
-                            accentDim: '#b91c1c',
+                            // CHANGED: Accent is now Green (#22c55e) instead of Red
+                            accent: '#22c55e',
+                            // CHANGED: AccentDim is now Darker Green instead of Dark Red
+                            accentDim: '#15803d',
                             red: '#ff4757',
                             redDim: '#cc3a47',
                             blue: '#3b82f6',
@@ -82,9 +84,10 @@
         }
     </script>
     <style>
+        /* CHANGED: Scrollbar colors to Green (#22c55e) */
         * {
             scrollbar-width: thin;
-            scrollbar-color: #dc2626 #161b22;
+            scrollbar-color: #22c55e #161b22;
         }
         *::-webkit-scrollbar {
             width: 8px;
@@ -93,7 +96,7 @@
             background: #161b22;
         }
         *::-webkit-scrollbar-thumb {
-            background: #dc2626;
+            background: #22c55e;
             border-radius: 4px;
         }
 
@@ -115,7 +118,8 @@
             clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
             transform: translate(-2px, -2px);
             opacity: 0.8;
-            color: #ff4757;
+            /* CHANGED: Glitch effect color to Green */
+            color: #22c55e;
         }
         .glitch-text:hover::after {
             animation: glitchBottom 0.3s ease-in-out;
@@ -139,6 +143,7 @@
             80% { transform: translate(-3px, 3px); }
         }
 
+        /* CHANGED: Scanline color to Green RGB (34, 197, 94) */
         .scan-line::after {
             content: '';
             position: absolute;
@@ -146,23 +151,25 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(transparent, rgba(220, 38, 38, 0.1), transparent);
+            background: linear-gradient(transparent, rgba(34, 197, 94, 0.1), transparent);
             animation: scan 8s linear infinite;
             pointer-events: none;
         }
 
+        /* CHANGED: Circuit pattern color to Green RGB */
         .circuit-pattern {
             background-image:
-                linear-gradient(90deg, rgba(220, 38, 38, 0.03) 1px, transparent 1px),
-                linear-gradient(rgba(220, 38, 38, 0.03) 1px, transparent 1px);
+                linear-gradient(90deg, rgba(34, 197, 94, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(34, 197, 94, 0.03) 1px, transparent 1px);
             background-size: 40px 40px;
         }
 
+        /* CHANGED: Box shadow to Green RGB */
         .terminal-window {
             background: linear-gradient(180deg, #1a1f2e 0%, #0d1117 100%);
             border: 1px solid #30363d;
             box-shadow:
-                0 0 0 1px rgba(220, 38, 38, 0.1),
+                0 0 0 1px rgba(34, 197, 94, 0.1),
                 0 25px 50px -12px rgba(0, 0, 0, 0.8),
                 inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
@@ -172,6 +179,7 @@
             position: relative;
             overflow: hidden;
         }
+        /* CHANGED: Hover gradient to Green RGB */
         .card-hover::before {
             content: '';
             position: absolute;
@@ -179,16 +187,17 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.05), transparent);
+            background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.05), transparent);
             transition: left 0.5s ease;
         }
         .card-hover:hover::before {
             left: 100%;
         }
+        /* CHANGED: Hover border and shadow to Green */
         .card-hover:hover {
             transform: translateY(-4px);
-            border-color: #dc2626;
-            box-shadow: 0 0 30px rgba(220, 38, 38, 0.1);
+            border-color: #22c55e;
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.1);
         }
 
         .skill-bar {
@@ -210,22 +219,25 @@
             100% { transform: translateX(100%); }
         }
 
+        /* CHANGED: Typing cursor to Green */
         .typing-cursor::after {
             content: '|';
             animation: blink 1s step-end infinite;
-            color: #dc2626;
+            color: #22c55e;
         }
 
+        /* CHANGED: Badge glow to Green RGB */
         .badge-glow {
-            box-shadow: 0 0 15px rgba(220, 38, 38, 0.2);
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.2);
             transition: box-shadow 0.3s ease;
         }
         .badge-glow:hover {
-            box-shadow: 0 0 25px rgba(220, 38, 38, 0.4);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.4);
         }
 
+        /* CHANGED: Focus outline to Green */
         a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
-            outline: 2px solid #dc2626;
+            outline: 2px solid #22c55e;
             outline-offset: 2px;
         }
     </style>
@@ -328,7 +340,8 @@
                     ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
                     ctx.fillRect(0, 0, width, height);
 
-                    ctx.fillStyle = '#dc2626'; 
+                    // CHANGED: Matrix rain color to Green (#22c55e)
+                    ctx.fillStyle = '#22c55e'; 
                     ctx.font = '15px JetBrains Mono';
 
                     for (let i = 0; i < drops.length; i++) {
@@ -531,7 +544,7 @@
                         <p className="text-base sm:text-lg md:text-xl text-terminal-muted max-w-2xl mx-auto mb-8 sm:mb-12 font-sans animate-fade-in px-4" style={ { animationDelay: '3s' } }>
                             Computer Science student at <span className="text-white font-semibold">NUST</span> focused on
                             <span className="text-terminal-accent"> programming</span>, secure system design, and
-                            <span className="text-terminal-red"> ethical hacking</span> fundamentals.
+                            <span className="text-terminal-green"> ethical hacking</span> fundamentals.
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 animate-slide-up px-4" style={ { animationDelay: '3.5s' } }>
@@ -952,98 +965,115 @@
         };
 
         // ============================================
-        // SKILLS SECTION
+        // SKILLS SECTION (The System Modules Design)
         // ============================================
         const SkillsSection = () => {
-            const skillCategories = [
+            const modules = [
                 {
-                    name: 'Development',
-                    icon: 'fa-code',
-                    color: 'terminal-blue',
+                    id: "SYS_MOD_01",
+                    icon: "fa-code", 
+                    title: "CORE_LANGUAGES",
+                    status: "ACTIVE",
                     skills: [
-                        { name: 'Python', level: 90 },
-                        { name: 'Java', level: 85 },
-                        { name: 'JavaScript', level: 80 },
-                        { name: 'React', level: 80 },
-                        { name: 'SQL / DB Design', level: 75 },
-                        { name: 'HTML / CSS', level: 85 }
+                        { name: "Python", desc: "Automation & Scripting" },
+                        { name: "Java", desc: "Object-Oriented Programming" },
+                        { name: "JavaScript", desc: "Frontend Logic" },
+                        { name: "React", desc: "UI Components" },
+                        { name: "SQL / DB Design", desc: "Data Management" },
+                        { name: "HTML / CSS", desc: "Structure & Styling" }
                     ]
                 },
                 {
-                    name: 'Frameworks',
-                    icon: 'fa-layer-group',
-                    color: 'terminal-purple',
+                    id: "SYS_MOD_02",
+                    icon: "fa-shield-halved",
+                    title: "CYBERSECURITY_OPS",
+                    status: "ENGAGED",
                     skills: [
-                        { name: 'Django', level: 80 },
-                        { name: 'Flask', level: 75 },
-                        { name: 'REST APIs', level: 78 },
-                        { name: 'Tailwind CSS', level: 85 },
-                        { name: 'Git & GitHub', level: 82 }
+                        { name: "Network Defence", desc: "Traffic Analysis & Firewalling" },
+                        { name: "Endpoint Security", desc: "Host-Based Protection" },
+                        { name: "Pen-Testing", desc: "Vulnerability Assessment" },
+                        { name: "Linux CLI", desc: "System Administration" }
                     ]
                 },
                 {
-                    name: 'Security',
-                    icon: 'fa-shield-halved',
-                    color: 'terminal-accent',
+                    id: "SYS_MOD_03",
+                    icon: "fa-layer-group",
+                    title: "FRAMEWORKS_&_TOOLS",
+                    status: "ONLINE",
                     skills: [
-                        { name: 'Network Defense', level: 75 },
-                        { name: 'Endpoint Security', level: 78 },
-                        { name: 'Pen-Testing Basics', level: 60 },
-                        { name: 'Linux CLI', level: 70 }
+                        { name: "Django", desc: "Full-Stack Web Dev" },
+                        { name: "Flask", desc: "Lightweight Microservices" },
+                        { name: "Tailwind CSS", desc: "Rapid UI Design" },
+                        { name: "REST APIs (DRF)", desc: "Backend Integration" },
+                        { name: "Git & GitHub", desc: "Version Control" }
                     ]
                 }
             ];
 
-            const colorClasses = {
-                'terminal-accent': 'bg-terminal-accent',
-                'terminal-blue': 'bg-terminal-blue',
-                'terminal-purple': 'bg-terminal-purple'
-            };
-
             return (
-                <section id="skills" className="py-16 sm:py-24 px-4 bg-terminal-surface/30 circuit-pattern">
-                    <div className="max-w-7xl mx-auto">
-                        <div className="text-center mb-12 sm:mb-16">
-                            <div className="inline-flex items-center px-4 py-2 bg-terminal-surface border border-terminal-border rounded-full mb-6">
-                                <span className="w-2 h-2 rounded-full bg-terminal-purple mr-3 animate-pulse"></span>
-                                <span className="font-mono text-sm text-terminal-purple">Tech Stack</span>
+                <section id="skills" className="py-24 bg-terminal-bg relative overflow-hidden font-mono">
+                    {/* Background Grid Decoration */}
+                    <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,0,0.03)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none"></div>
+
+                    <div className="container mx-auto px-6 relative z-10">
+                        {/* Section Header */}
+                        <div className="flex flex-col md:flex-row md:items-end gap-4 mb-16 border-b border-terminal-green/30 pb-4">
+                            <div>
+                                <h2 className="text-4xl font-bold text-white mb-2">
+                                    <span className="text-terminal-green mr-2">&gt;&gt;</span>
+                                    SYSTEM_MODULES
+                                </h2>
+                                <p className="text-terminal-muted text-sm">Initializing technical competency database...</p>
                             </div>
-                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-mono font-bold text-white mb-4">
-                                Skills & <span className="text-terminal-purple">Tools</span>
-                            </h2>
+                            <div className="md:ml-auto">
+                                <span className="inline-block px-3 py-1 bg-terminal-green/10 border border-terminal-green text-terminal-green text-xs rounded animate-pulse">
+                                    ALL SYSTEMS NOMINAL
+                                </span>
+                            </div>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-                            {skillCategories.map((category, catIndex) => (
-                                <div
-                                    key={catIndex}
-                                    className="bg-terminal-surface border border-terminal-border rounded-xl p-5 sm:p-6"
-                                >
-                                    <div className="flex items-center gap-3 mb-6">
-                                        <div className={`p-3 rounded-lg ${colorClasses[category.color]}/20`}>
-                                            <i className={`fas ${category.icon} text-xl`}></i>
-                                        </div>
-                                        <h3 className="font-mono font-semibold text-lg sm:text-xl text-white">{category.name}</h3>
-                                    </div>
-
-                                    <div className="space-y-4">
-                                        {category.skills.map((skill, skillIndex) => (
-                                            <div key={skillIndex}>
-                                                <div className="flex justify-between mb-1">
-                                                    <span className="font-mono text-sm text-terminal-text">{skill.name}</span>
-                                                    <span className="font-mono text-xs text-terminal-muted">{skill.level}%</span>
-                                                </div>
-                                                <div className="h-2 bg-terminal-bg rounded-full overflow-hidden">
-                                                    <div
-                                                        className={`skill-bar h-full rounded-full ${colorClasses[category.color]}`}
-                                                        style={ {
-                                                            width: `${skill.level}%`,
-                                                            transition: 'width 1s ease-out'
-                                                        } }
-                                                    ></div>
+                        {/* The Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {modules.map((mod, index) => (
+                                <div key={index} className="group bg-terminal-card border border-terminal-green/20 p-6 hover:border-terminal-green/60 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden rounded-lg shadow-lg shadow-terminal-green/5">
+                                    
+                                    {/* Card Header */}
+                                    <div className="flex justify-between items-start mb-6">
+                                        <div className="flex items-center gap-3">
+                                            {/* Icon Box */}
+                                            <div className="w-12 h-12 rounded bg-terminal-green/5 flex items-center justify-center border border-terminal-green/30 group-hover:bg-terminal-green group-hover:text-black transition-all duration-300">
+                                                <i className={`fas ${mod.icon} text-xl text-terminal-green group-hover:text-black`}></i>
+                                            </div>
+                                            <div>
+                                                <h3 className="font-bold text-lg text-white tracking-wider">{mod.title}</h3>
+                                                <div className="flex items-center gap-2 text-[10px] text-terminal-green uppercase tracking-widest opacity-70">
+                                                    <span className="w-2 h-2 rounded-full bg-terminal-green animate-pulse"></span>
+                                                    {mod.id} // {mod.status}
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Skills List */}
+                                    <ul className="space-y-3">
+                                        {mod.skills.map((skill, i) => (
+                                            <li key={i} className="flex justify-between items-center border-b border-terminal-green/10 pb-2 last:border-0 group/item">
+                                                <div className="flex items-center gap-2">
+                                                    <span className="text-terminal-green/50 text-xs">&gt;</span>
+                                                    <span className="text-gray-200 font-medium group-hover/item:text-terminal-green transition-colors">
+                                                        {skill.name}
+                                                    </span>
+                                                </div>
+                                                <span className="text-xs text-terminal-muted group-hover/item:text-white transition-colors text-right pl-4">
+                                                    {skill.desc}
+                                                </span>
+                                            </li>
                                         ))}
+                                    </ul>
+
+                                    {/* Decoration Corner */}
+                                    <div className="absolute top-0 right-0 p-2 opacity-30 group-hover:opacity-100 transition-opacity">
+                                        <div className="w-8 h-8 border-t-2 border-r-2 border-terminal-green rounded-tr"></div>
                                     </div>
                                 </div>
                             ))}
