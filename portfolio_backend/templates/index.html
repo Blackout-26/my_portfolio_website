@@ -709,16 +709,14 @@
                 ]),
                 contact: () => ([
                     '',
-                    '┌─ CONTACT INFO ───────────────────────────────────┐',
-                    '│                                                   │',
-                    '│  📧 Email: ngonyamaprince26@gmail.com            │',
-                    '│  📍 Location: Harare, Zimbabwe                   │',
-                    '│  🎓 University: NUST (National University of     │',
-                    '│                 Science and Technology)          │',
-                    '│                                                   │',
-                    '│  Open to: Jobs, Freelance Work                   │',
-                    '│                                                   │',
-                    '└───────────────────────────────────────────────────┘',
+                    '┌─ CONTACT INFORMATION ──────────────────────────┐',
+                    '│                                                │',
+                    '│  📧 Direct: ngonyamaprince26@gmail.com        │',
+                    '│  💼 LinkedIn: prince-ngonyama-107473288       │',
+                    '│  🐙 GitHub: Blackout-26                       │',
+                    '│                                                │',
+                    '│  Open for: Full-time, Freelance, Collaborations│',
+                    '└────────────────────────────────────────────────┘',
                     ''
                 ]),
                 hack: () => ([
@@ -1242,200 +1240,59 @@
         // CONTACT SECTION
         // ============================================
         const ContactSection = () => {
-            const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-            const [isSubmitting, setIsSubmitting] = useState(false);
-            const [showSuccess, setShowSuccess] = useState(false);
-            const [error, setError] = useState('');
+        const socials = SOCIALS.map(s => ({
+            ...s,
+            icon: s.label === "X" ? "fa-brands fa-x-twitter" : 
+                  s.label === "GitHub" ? "fab fa-github" : 
+                  "fab fa-linkedin"
+        })).concat([
+            { icon: 'fas fa-envelope', label: 'Email', url: `mailto:${CONTACT_EMAIL}` }
+        ]);
 
-            const handleSubmit = async (e) => {
-                e.preventDefault();
-                setIsSubmitting(true);
-                setError('');
+        return (
+            <section id="contact" className="py-16 sm:py-24 px-4 bg-terminal-bg circuit-pattern">
+                <div className="max-w-4xl mx-auto">
+                    <div className="text-center mb-12">
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-mono font-bold text-white mb-4">
+                            Let's <span className="text-terminal-accent">Connect</span>
+                        </h2>
+                        <p className="text-terminal-muted max-w-lg mx-auto">
+                            My inbox is always open for collaborations, job opportunities, or just a chat about cybersecurity.
+                        </p>
+                    </div>
 
-                try {
-                    const response = await fetch('/api/contact', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(formData)
-                    });
-
-                    if (response.ok) {
-                        setShowSuccess(true);
-                        setFormData({ name: '', email: '', message: '' });
-                        setTimeout(() => setShowSuccess(false), 10000);
-                    } else {
-                        setError('Failed to send message. Please try again.');
-                    }
-                } catch {
-                     setError('Failed to send message. Please try again.');
-                } finally {
-                    setIsSubmitting(false);
-                }
-            };
-
-            const socials = SOCIALS.map(s => ({
-                ...s,
-                icon: s.label === "X" ? "fa-brands fa-x-twitter" : 
-                      s.label === "GitHub" ? "fab fa-github" : 
-                      "fab fa-linkedin"
-            })).concat([
-                { icon: 'fas fa-envelope', label: 'Email', url: `mailto:${CONTACT_EMAIL}` }
-            ]);
-
-            return (
-                <section id="contact" className="py-16 sm:py-24 px-4 bg-terminal-bg circuit-pattern">
-                    <div className="max-w-4xl mx-auto">
-                        <div className="text-center mb-12 sm:mb-16">
-                            <h2 className="text-3xl sm:text-4xl md:text-5xl font-mono font-bold text-white mb-4">
-                                Contact <span className="text-terminal-accent">Me</span>
-                            </h2>
-                            <p className="text-terminal-muted">
-                                Ready to collaborate? Let's connect.
-                            </p>
-                        </div>
-
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                            {/* Contact Form */}
-                            <div className="bg-terminal-surface border border-terminal-border rounded-xl p-6 sm:p-8">
-                                <h3 className="font-mono font-semibold text-lg text-white mb-6 flex items-center gap-2">
-                                    <i className="fas fa-paper-plane text-terminal-accent"></i>
-                                    Send a Message
-                                </h3>
-
-                                {showSuccess && (
-                                    <div className="mb-6 p-4 bg-terminal-green/10 border border-terminal-green/30 rounded-lg text-terminal-green text-sm">
-                                        <i className="fas fa-check-circle mr-2"></i>
-                                        Message sent successfully! I'll get back to you soon.
-                                    </div>
-                                )}
-
-                                {error && (
-                                    <div className="mb-6 p-4 bg-terminal-red/10 border border-terminal-red/30 rounded-lg text-terminal-red text-sm">
-                                        <i className="fas fa-exclamation-circle mr-2"></i>
-                                        {error}
-                                    </div>
-                                )}
-
-                                <form onSubmit={handleSubmit} className="space-y-5">
-                                    <div>
-                                        <label className="block text-sm font-mono text-terminal-muted mb-2">Name</label>
-                                        <input
-                                            type="text"
-                                            value={formData.name}
-                                            onChange={(e) => setFormData({...formData, name: e.target.value})}
-                                            className="w-full px-4 py-3 bg-terminal-bg border border-terminal-border rounded-lg text-terminal-text text-base focus:border-terminal-accent focus:outline-none transition-colors"
-                                            style={ { fontSize: '16px' } }
-                                            required
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-mono text-terminal-muted mb-2">Email</label>
-                                        <input
-                                            type="email"
-                                            value={formData.email}
-                                            onChange={(e) => setFormData({...formData, email: e.target.value})}
-                                            className="w-full px-4 py-3 bg-terminal-bg border border-terminal-border rounded-lg text-terminal-text text-base focus:border-terminal-accent focus:outline-none transition-colors"
-                                            style={ { fontSize: '16px' } }
-                                            required
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-mono text-terminal-muted mb-2">Message</label>
-                                        <textarea
-                                            rows="4"
-                                            value={formData.message}
-                                            onChange={(e) => setFormData({...formData, message: e.target.value})}
-                                            className="w-full px-4 py-3 bg-terminal-bg border border-terminal-border rounded-lg text-terminal-text text-base focus:border-terminal-accent focus:outline-none transition-colors resize-none"
-                                            style={ { fontSize: '16px' } }
-                                            required
-                                        ></textarea>
-                                    </div>
-                                    <button
-                                        type="submit"
-                                        disabled={isSubmitting}
-                                        className="w-full py-3 sm:py-4 bg-terminal-accent text-white font-mono font-semibold rounded-lg hover:bg-terminal-accentDim transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    <div className="max-w-2xl mx-auto">
+                        <div className="bg-terminal-surface border border-terminal-border rounded-xl p-8">
+                            <h3 className="font-mono font-semibold text-lg text-white mb-8 flex items-center justify-center gap-2">
+                                <i className="fas fa-share-alt text-terminal-accent"></i>
+                                Professional Channels
+                            </h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                {socials.map((social, index) => (
+                                    <a
+                                        key={index}
+                                        href={social.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center justify-center gap-4 p-5 bg-terminal-bg border border-terminal-border rounded-lg hover:border-terminal-accent hover:bg-terminal-accent/5 hover:text-terminal-accent transition-all group"
                                     >
-                                        {isSubmitting ? (
-                                            <>
-                                                <i className="fas fa-circle-notch animate-spin"></i>
-                                                Sending...
-                                            </>
-                                        ) : (
-                                            <>
-                                                <i className="fas fa-paper-plane"></i>
-                                                Send Message
-                                            </>
-                                        )}
-                                    </button>
-                                </form>
+                                        <i className={`${social.icon} text-2xl group-hover:scale-110 transition-transform`}></i>
+                                        <span className="text-lg font-mono font-bold">{social.label}</span>
+                                        </a>
+                                ))}
                             </div>
-
-                            {/* Contact Info & Socials */}
-                            <div className="space-y-6">
-                                {/* Location Info */}
-                                <div className="bg-terminal-surface border border-terminal-border rounded-xl p-6">
-                                    <h3 className="font-mono font-semibold text-lg text-white mb-4 flex items-center gap-2">
-                                        <i className="fas fa-info-circle text-terminal-blue"></i>
-                                        Quick Info
-                                    </h3>
-                                    <div className="space-y-4">
-                                        <div className="flex items-center gap-4 p-3 bg-terminal-bg rounded-lg">
-                                            <div className="p-2 bg-terminal-accent/20 rounded-lg">
-                                                <i className="fas fa-map-marker-alt text-terminal-accent"></i>
-                                            </div>
-                                            <div>
-                                                <div className="text-xs text-terminal-muted">Location</div>
-                                                <div className="text-sm text-white">Harare, Zimbabwe</div>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-center gap-4 p-3 bg-terminal-bg rounded-lg">
-                                            <div className="p-2 bg-terminal-green/20 rounded-lg">
-                                                <i className="fas fa-graduation-cap text-terminal-green"></i>
-                                            </div>
-                                            <div>
-                                                <div className="text-xs text-terminal-muted">University</div>
-                                                <div className="text-sm text-white">NUST Zimbabwe</div>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-center gap-4 p-3 bg-terminal-bg rounded-lg">
-                                            <div className="p-2 bg-terminal-purple/20 rounded-lg">
-                                                <i className="fas fa-briefcase text-terminal-purple"></i>
-                                            </div>
-                                            <div>
-                                                <div className="text-xs text-terminal-muted">Open For</div>
-                                                <div className="text-sm text-white">Jobs, Freelance Work</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Social Links */}
-                                <div className="bg-terminal-surface border border-terminal-border rounded-xl p-6">
-                                    <h3 className="font-mono font-semibold text-lg text-white mb-4 flex items-center gap-2">
-                                        <i className="fas fa-share-alt text-terminal-purple"></i>
-                                        Connect With Me
-                                    </h3>
-                                    <div className="grid grid-cols-2 gap-3">
-                                        {socials.map((social, index) => (
-                                            <a
-                                                key={index}
-                                                href={social.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="flex items-center gap-3 p-3 bg-terminal-bg border border-terminal-border rounded-lg hover:border-terminal-accent hover:text-terminal-accent transition-colors group"
-                                            >
-                                                <i className={`${social.icon} text-lg group-hover:text-terminal-accent transition-colors`}></i>
-                                                <span className="text-sm font-mono text-terminal-muted group-hover:text-terminal-accent">{social.label}</span>
-                                            </a>
-                                        ))}
-                                    </div>
-                                </div>
+                        
+                            <div className="mt-8 pt-8 border-t border-terminal-border text-center">
+                                <p className="text-terminal-muted text-sm font-mono">
+                                    Currently based in <span className="text-white">Harare, Zimbabwe</span>
+                                </p>
                             </div>
                         </div>
                     </div>
-                </section>
-            );
-        };
+                </div>
+            </section>
+        );
+    };
 
         // ============================================
         // FOOTER COMPONENT
